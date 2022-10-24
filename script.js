@@ -32,7 +32,7 @@ mainEl.style.backgroundColor = 'var(--main-bg)';
 mainEl.innerHTML = '<h1> SEI Rocks! </h1>';
 
 //TASK 1.3
-mainEl.classList.toggle('flex-ctr');
+mainEl.classList.add('flex-ctr');
 
 //============ Task 2 ===========
 
@@ -46,7 +46,7 @@ topMenuEl.style.height = '100%';
 topMenuEl.style.backgroundColor = 'var(--top-menu-bg)';
 
 //TASK 2.3
-topMenuEl.classList.toggle('flex-around');
+topMenuEl.classList.add('flex-around');
 
 //============ Task 3 =============
 
@@ -56,12 +56,11 @@ menuLinks.forEach((link) => {
   newATag.setAttribute('href', link.href);
   newATag.textContent = link.text;
   topMenuEl.append(newATag);
-
 })
-//*************** PART 2 ****************/
+//*************************************************************************** PART 2 ****************************************************************************/
 
 //Task 4.0
-const subMenuEl = document.getElementById('sub-menu');
+let subMenuEl = document.getElementById('sub-menu');
 
 //Task 4.1
 subMenuEl.style.height = '100%';
@@ -70,7 +69,7 @@ subMenuEl.style.height = '100%';
 subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
 
 ////Task 4.3
-subMenuEl.classList.toggle('flex-around');
+subMenuEl.classList.add('flex-around');
 
 ////Task 4.4
 subMenuEl.style.position = 'absolute';
@@ -128,35 +127,44 @@ topMenuEl.addEventListener('click', (evt) => {
   evt.target.classList.add("active")
   // console.log(evt.target)
 
+  let link
 
   //Task 5.6  
 
   for (let i = 0; i < menuLinks.length; i++) {
-    console.log('menuLinks')
+    //console.log('menuLinks')
 
-    console.log(menuLinks[i])
+    // console.log(menuLinks[i])
     // console.log(menuLinks[i].subLinks)
 
-    console.log(menuLinks[i].hasOwnProperty('subLinks'))
+    //console.log(menuLinks[i].hasOwnProperty('subLinks'))
 
 
-    showingSubMenu = menuLinks[i].hasOwnProperty('subLinks')
-    if (menuLinks[i].hasOwnProperty('subLinks')) {
-
-      console.log(menuLinks[i].subLinks)
+    if (menuLinks[i].hasOwnProperty('subLinks') && menuLinks[i].text === evt.target.textContent) {
+      showingSubMenu = menuLinks[i].hasOwnProperty('subLinks')
+      link = menuLinks[i]
+      console.log(menuLinks[i])
     }
-
   }
 
- 
-   //Task 5.7
+  //Task 5.7
 
+  if (showingSubMenu === true) {
+    buildSubMenu(link.subLinks)
+    subMenuEl.style.top = '100%'
+  } else {
+    subMenuEl.style.top = "0%"
+  }
 
+  // Task 5.8
 
-   // Task 5.8
+  function buildSubMenu() {
+    subMenuEl.textContent =''
+    console.log(subMenuEl)
+
+    }
 
 })
-
 
 
 
