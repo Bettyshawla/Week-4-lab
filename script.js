@@ -159,12 +159,55 @@ topMenuEl.addEventListener('click', (evt) => {
   // Task 5.8
 
   function buildSubMenu() {
-    subMenuEl.textContent =''
-    console.log(subMenuEl)
-
-    }
+    subMenuEl.textContent = ''
+    link.subLinks.forEach((link) => {
+      const aTag = document.createElement('a')
+      aTag.setAttribute('href', link.href)
+      aTag.textContent = link.text;
+      subMenuEl.append(aTag)
+    });
+  }
 
 })
 
+// Attach a delegated 'click' event listener to subMenuEl.
+
+// The first line of code of the event listener function should call the event object's preventDefault()method.
+
+// The second line of code function should immediately return if the element clicked was not an <a>element.
+
+// console.logthe content of the <a>to verify the handler is working.
 
 
+// Task 6.0
+
+subMenuEl.addEventListener('click', (evt) => {
+
+  evt.preventDefault();
+
+  if (evt.target.tagName === 'A') {
+    console.log(evt.target.textContent)
+  }
+})
+
+/*
+
+
+
+Iterate over the entire menuLinks array and for each "link" object:
+
+Create an <a> element.
+On the new element, add an href attribute with its value set to the href property of the "link" object.
+Set the new element's content to the value of the text property of the "link" object.
+Append the new element to the topMenuEl element.
+
+5.8
+
+Clears the contents of subMenuEl.
+Iterates over the subLinksarray passed as an argument; and for each "link" object:
+
+Create an <a>element.
+On the new element, add an hrefattribute with its value set to the hrefproperty of the "link" object.
+Set the new element's content to the value of the textproperty of the "link" object.
+Append the new element to the subMenuElelement.
+*/
