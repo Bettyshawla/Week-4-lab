@@ -23,7 +23,7 @@ var menuLinks = [
 ];
 
 //TASK 1.0
-const mainEl = document.querySelector('main');
+var mainEl = document.querySelector('main');
 
 //TASK 1.1
 mainEl.style.backgroundColor = 'var(--main-bg)';
@@ -92,12 +92,8 @@ topMenuEl.addEventListener('click', (evt) => {
 
   if (evt.target.tagName === 'A') {
 
-    console.log(evt.target.textContent)
-
+    console.log(evt.target.textContent);
     //Ensure that clicking ABOUT, CATALOG, etc. logs out about, catalog, etc. when a link is clicked.
-
-  } else {
-
   }
 
   //Task 5.3
@@ -111,46 +107,35 @@ topMenuEl.addEventListener('click', (evt) => {
     subMenuEl.style.top = '0';
     //5.3.4
     return
-  } else {
-
   }
 
   //Task 5.4
 
-  let removeLink = document.querySelectorAll("#top-menu")
+  let removeLink = document.querySelectorAll("#top-menu");
   removeLink.forEach(function (evt) {
-    evt.classList.remove("active")
+    evt.classList.remove("active");
   })
-  //console.log(removeLink)
+
 
   //Task 5.5
-  evt.target.classList.add("active")
-  // console.log(evt.target)
-
-  let link
+  evt.target.classList.add("active");
 
   //Task 5.6  
+  let currentLink = {};
 
   for (let i = 0; i < menuLinks.length; i++) {
-    //console.log('menuLinks')
 
-    // console.log(menuLinks[i])
-    // console.log(menuLinks[i].subLinks)
-
-    //console.log(menuLinks[i].hasOwnProperty('subLinks'))
-
-
-    if (menuLinks[i].hasOwnProperty('subLinks') && menuLinks[i].text === evt.target.textContent) {
-      showingSubMenu = menuLinks[i].hasOwnProperty('subLinks')
-      link = menuLinks[i]
-      console.log(menuLinks[i])
+    if (menuLinks[i].text === evt.target.textContent) {
+      showingSubMenu = menuLinks[i].hasOwnProperty('subLinks');
+      currentLink = menuLinks[i]
     }
+    //no else statement is needed
   }
 
   //Task 5.7
 
   if (showingSubMenu === true) {
-    buildSubMenu(link.subLinks)
+    buildSubMenu(currentLink)
     subMenuEl.style.top = '100%'
   } else {
     subMenuEl.style.top = "0%"
@@ -159,9 +144,10 @@ topMenuEl.addEventListener('click', (evt) => {
   // Task 5.8
 
   function buildSubMenu() {
-    subMenuEl.textContent = ''
-    link.subLinks.forEach((link) => {
-      const aTag = document.createElement('a')
+    subMenuEl.innerHTML = '';
+    console.log(subMenuEl);
+    currentLink.subLinks.forEach((link) => {
+      let aTag = document.createElement('a')
       aTag.setAttribute('href', link.href)
       aTag.textContent = link.text;
       subMenuEl.append(aTag)
@@ -170,44 +156,52 @@ topMenuEl.addEventListener('click', (evt) => {
 
 })
 
-// Attach a delegated 'click' event listener to subMenuEl.
-
-// The first line of code of the event listener function should call the event object's preventDefault()method.
-
-// The second line of code function should immediately return if the element clicked was not an <a>element.
-
-// console.logthe content of the <a>to verify the handler is working.
-
 
 // Task 6.0
+
 
 subMenuEl.addEventListener('click', (evt) => {
 
   evt.preventDefault();
 
   if (evt.target.tagName === 'A') {
+
     console.log(evt.target.textContent)
   }
-})
 
+  // Task 6.1
+
+  showingSubMenu === false;
+  subMenuEl.style.top = '0';
+
+  // Task 6.2
+
+  topMenuLinks.forEach((args) => {
+    args.classList.remove('active')
+  })
+  // if (evt.target.classList.contains('active')) {
+  //   mainEl.lastChild.textContent = evt.target.textContent;
+  //   evt.target.classList.remove('active');
+  //   return
+  // } else if (showingSubMenu == false) {
+  //   console.log(showingSubMenu)
+  //   mainEl.lastChild.textContent = "About";
+  // }   
+  //OTHER WAY TO DO IT
+
+
+  // // Task 6.3
+  console.log(mainEl)
+  mainEl.lastElementChild.textContent = evt.target.textContent;
+  mainEl.style.textTransform = 'upperCase'
+  
+  // Task 6.4
+ console.log( topMenuEl)
+console.log( menuLinks)
+})
 /*
 
+Links to an external site.Task 6.3
+Update the contents of mainEl to the contents of the <a> element, 
 
-
-Iterate over the entire menuLinks array and for each "link" object:
-
-Create an <a> element.
-On the new element, add an href attribute with its value set to the href property of the "link" object.
-Set the new element's content to the value of the text property of the "link" object.
-Append the new element to the topMenuEl element.
-
-5.8
-
-Clears the contents of subMenuEl.
-Iterates over the subLinksarray passed as an argument; and for each "link" object:
-
-Create an <a>element.
-On the new element, add an hrefattribute with its value set to the hrefproperty of the "link" object.
-Set the new element's content to the value of the textproperty of the "link" object.
-Append the new element to the subMenuElelement.
 */
