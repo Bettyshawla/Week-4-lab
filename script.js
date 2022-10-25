@@ -153,7 +153,11 @@ topMenuEl.addEventListener('click', (evt) => {
       subMenuEl.append(aTag)
     });
   }
-
+  if(evt.target.text === "about"){
+    mainEl.innerHTML = `<h1> ${evt.target.text} </h1>`
+    mainEl.style.textTransform = 'upperCase'
+  
+  }
 })
 
 
@@ -179,29 +183,15 @@ subMenuEl.addEventListener('click', (evt) => {
   topMenuLinks.forEach((args) => {
     args.classList.remove('active')
   })
-  // if (evt.target.classList.contains('active')) {
-  //   mainEl.lastChild.textContent = evt.target.textContent;
-  //   evt.target.classList.remove('active');
-  //   return
-  // } else if (showingSubMenu == false) {
-  //   console.log(showingSubMenu)
-  //   mainEl.lastChild.textContent = "About";
-  // }   
-  //OTHER WAY TO DO IT
 
 
   // // Task 6.3
-  console.log(mainEl)
-  mainEl.lastElementChild.textContent = evt.target.textContent;
+
+  // mainEl.lastElementChild.textContent = evt.target.textContent;- //this does work too
+  mainEl.innerHTML = `<h1> ${evt.target.text} </h1>`;
   mainEl.style.textTransform = 'upperCase'
   
   // Task 6.4
- console.log( topMenuEl)
-console.log( menuLinks)
+  //i did this on the topMenuEl event listner
+
 })
-/*
-
-Links to an external site.Task 6.3
-Update the contents of mainEl to the contents of the <a> element, 
-
-*/
